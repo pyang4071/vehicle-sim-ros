@@ -36,12 +36,24 @@ COPY ./src/vehicle-sim /sim_ws/src/vehicle-sim
 
 # this would essentially set /sim_ws/src/vehicle as our default directory
 # similar to cd /sim_ws
-WORKSPACE /sim_ws/src/vehicle-sim
+WORKDIR /sim_ws/src/vehicle-sim
 
 # install all the dependencies written in the pyproject
 RUN pip3 install --upgrade pip
 RUN pip3 install -e .
 RUN pip3 install -e '.[dev]'
+
+# move back to the original workspace
+# back to the root
+WORKDIR /sim_ws
+
+# auto source the ros2 
+# these files should just be from the docker image 
+RUN echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc && \
+    echo "source /sim_ws/install/setup.bash" >> ~/.bashrc
+
+# now we set out default shell at entry into the docker
+ENTRYPOINT ["/bin/bash"]
 
 
 
