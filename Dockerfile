@@ -32,7 +32,7 @@ RUN mkdir -p /sim_ws
 
 # copy over our entire package into the src folder cheers
 COPY ./vehicle-sim /sim_ws/vehicle-sim
-COPY ./pyproject.toml ./setup.py ./README.md /sim_ws
+COPY ./pyproject.toml ./README.md /sim_ws
 
 # this would essentially set /sim_ws/ as our default directory
 # similar to cd /sim_ws
