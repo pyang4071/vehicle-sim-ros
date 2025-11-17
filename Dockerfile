@@ -19,7 +19,6 @@ RUN apt-get update && apt-get install -y \
 	ros-humble-rviz2 \
 	tmux \
 	vim \
-	nvim \
 	&& rm -rf /var/lib/apt/list/* 
 
 # install tools needed for the pyproject
