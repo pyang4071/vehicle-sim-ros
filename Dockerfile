@@ -28,28 +28,25 @@ RUN pip3 install --upgrade pip setuptools wheel build
 
 # create a directory sim_ws for all our work to be in
 # src will be where all of our module will live
-RUN mkdir -p /sim_ws/src
+RUN mkdir -p /sim_ws
 
 # copy over our entire package into the src folder cheers
-COPY ./src/vehicle-sim /sim_ws/src/vehicle-sim
+COPY ./vehicle-sim /sim_ws/vehicle-sim
+COPY ./pyproject.toml ./setup.py ./README.md /sim_ws
 
-# this would essentially set /sim_ws/src/vehicle as our default directory
+# this would essentially set /sim_ws/ as our default directory
 # similar to cd /sim_ws
-WORKDIR /sim_ws/src/vehicle-sim
+WORKDIR /sim_ws/
 
 # install all the dependencies written in the pyproject
 RUN pip3 install --upgrade pip
-RUN pip3 install -e .
-RUN pip3 install -e '.[dev]'
+RUN pip3 install --editible .
+RUN pip3 install --editible '.[dev]'
 
-# move back to the original workspace
-# back to the root
-WORKDIR /sim_ws
 
 # auto source the ros2 
 # these files should just be from the docker image 
-RUN echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc && \
-    echo "source /sim_ws/install/setup.bash" >> ~/.bashrc
+RUN echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
 
 # now we set out default shell at entry into the docker
 ENTRYPOINT ["/bin/bash"]

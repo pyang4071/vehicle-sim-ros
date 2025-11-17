@@ -12,3 +12,10 @@ docker pull ubuntu
 
 # build the docker
 sudo docker build -t vehicle-dev .
+
+build -t [name] [location]
+
+flags
+    t : specify name 
+
+
