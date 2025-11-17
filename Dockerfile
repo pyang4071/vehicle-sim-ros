@@ -40,8 +40,8 @@ WORKDIR /sim_ws/
 
 # install all the dependencies written in the pyproject
 RUN pip3 install --upgrade pip
-RUN pip3 install --editible .
-RUN pip3 install --editible '.[dev]'
+RUN pip3 install -e .
+RUN pip3 install -e '.[dev]'
 
 
 # auto source the ros2 
