@@ -31,8 +31,7 @@ RUN pip3 install --upgrade pip setuptools wheel build
 RUN mkdir -p /sim_ws
 
 # copy over our entire package into the src folder cheers
-COPY ./vehicle_sim /sim_ws/vehicle_sim
-COPY ./pyproject.toml ./README.md /sim_ws
+COPY . /sim_ws
 
 # this would essentially set /sim_ws/ as our default directory
 # similar to cd /sim_ws

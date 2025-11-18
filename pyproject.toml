@@ -3,7 +3,7 @@ requires = ["setuptools >= 77.0.3", "setuptools_scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "vehicle-simulation"
+name = "vehicle-sim"
 dynamic = ["version"]
 dependencies = [
   "numpy",
@@ -32,8 +32,8 @@ select = [
 ]
 
 [project.scripts]
-vehicle-simulation = "__main__:main"
+vehicle-sim = "vehicle_sim.__main__:main"
 
 # version management library
-[tools.setuptools_scm]
-write_to =  "vehicle-sim/__version__.py"
+[tool.setuptools_scm]
+write_to =  "vehicle_sim/__version__.py"

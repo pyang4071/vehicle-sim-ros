@@ -1,8 +1,7 @@
 docker run -it --rm \
-  -v $(pwd)/vehicle_sim:/sim_ws/vehicle_sim \
-  -v $(pwd)/pyproject.toml:/sim_ws/pyproject.toml \
+  -v $(pwd):/sim_ws \
   -w /sim_ws \
-  vehicle_sim
+  vehicle-dev
 
 
 # flags
