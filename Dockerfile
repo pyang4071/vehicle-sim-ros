@@ -18,13 +18,13 @@ RUN apt-get update && apt-get install -y \
 	libeigen3-dev \
 	tmux \
 	vim \
-  # for ros stuff without needing the entire desktop version
+  	# for ros stuff without needing the entire desktop version
 	ros-humble-rviz2 \
-  ros-humble-turtlesim \
-  ros-humble-rqt \
-  ros-humble-rqt-common-plugins \
-  # for gazebo
-  ros-humble-gazebo-ros
+  	ros-humble-turtlesim \
+  	ros-humble-rqt \
+  	ros-humble-rqt-common-plugins \
+	# for gazebo
+  	ros-humble-gazebo-ros \
 	&& rm -rf /var/lib/apt/lists/* 
 
 # install tools needed for the pyproject
