@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools >= 77.0.3", "setuptools_scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vehicle-sim"
+dynamic = ["version"]
+dependencies = [
+  "numpy",
+  "matplotlib",
+  "pynput",
+]
+readme = "README.md"
+
+[project.optional-dependencies]
+dev = [
+  "black",
+  "mypy",
+  "pre-commit",
+  "pytest",
+  "ruff",
+  "scipy",
+]
+
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+]
+
+[project.scripts]
+vehicle-sim = "vehicle_sim.__main__:main"
+
+# version management library
+[tool.setuptools_scm]
+write_to =  "vehicle_sim/__version__.py"
