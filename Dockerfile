@@ -12,12 +12,13 @@ SHELL ["/bin/bash", "-c"]
 # we install git, python, ros2 and dev tools
 # libeigen3-dev is for c++ which ros needs i think
 # finally we clean up some of the not useful stuff to make the image smaller
+# split download into two parts
+# first part is large and hopefully not ahve the change - we want to cache it
+# add smaller ones afterwards to save time
 RUN apt-get update && apt-get install -y \
 	git \
 	python3-pip \
 	libeigen3-dev \
-	tmux \
-	vim \
   	# for ros stuff without needing the entire desktop version
 	ros-humble-rviz2 \
   	ros-humble-turtlesim \
@@ -25,7 +26,14 @@ RUN apt-get update && apt-get install -y \
   	ros-humble-rqt-common-plugins \
 	# for gazebo
   	ros-humble-gazebo-ros \
-	&& rm -rf /var/lib/apt/lists/* 
+	# for X11 test
+	x11-apps 
+
+
+RUN apt-get install -y \
+	tmux \
+	vim \
+	&& rm -rf /var/lib/apt/lists/*
 
 # install tools needed for the pyproject
 # we are using the setuptools build system
