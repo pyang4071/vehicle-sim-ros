@@ -34,10 +34,6 @@ select = [
 [project.scripts]
 vehicle-sim = "vehicle_sim.__main__:main"
 
-[tool.setuptools]
-package = ["vehicle_sim"]
-include-package-data = true
-
 # version management library
 [tool.setuptools_scm]
 write_to =  "vehicle_sim/__version__.py"

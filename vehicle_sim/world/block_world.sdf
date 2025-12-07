@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<sdf version="1.7">
+  <world name="default">
+
+    <include>
+      <uri>model://moving_block</uri>
+    </include>
+
+    <physics type="ode">
+      <gravity>0 0 -9.8</gravity>
+    </physics>
+
+  </world>
+</sdf>
