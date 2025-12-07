@@ -12,24 +12,35 @@ SHELL ["/bin/bash", "-c"]
 # we install git, python, ros2 and dev tools
 # libeigen3-dev is for c++ which ros needs i think
 # finally we clean up some of the not useful stuff to make the image smaller
-# split download into two parts
+# split download into multiple parts
 # first part is large and hopefully not ahve the change - we want to cache it
-# add smaller ones afterwards to save time
+# add smaller ones afterwards to save tume
 RUN apt-get update && apt-get install -y \
 	git \
 	python3-pip \
 	libeigen3-dev \
   	# for ros stuff without needing the entire desktop version
 	ros-humble-rviz2 \
-  	ros-humble-turtlesim \
-  	ros-humble-rqt \
-  	ros-humble-rqt-common-plugins \
-	# for gazebo
-  	ros-humble-gazebo-ros \
-	# for X11 test
+  ros-humble-turtlesim \
+  ros-humble-rqt \
+  ros-humble-rqt-common-plugins \
+	  # for X11 test
 	x11-apps 
 
+# gazebo stuff
+RUN apt-get update && apt-get install -y \
+  gnupg lsb-release wget && \
+  wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/gazebo-archive-keyring.gpg && \
+  echo "deb [arch=amd64 signed-by=/usr/share/keyrings/gazebo-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu $(lsb_release -cs) stable" \
+      > /etc/apt/sources.list.d/gazebo-stable.list
 
+RUN apt-get update && apt-get install -y \
+  gz-garden \
+  ros-humble-ros-gz \
+	&& rm -rf /var/lib/apt/lists/*
+
+
+# Dev tools
 RUN apt-get install -y \
 	tmux \
 	vim \
