@@ -1,0 +1,2 @@
+include vehicle_sim/world/*.sdf
+include vehicle_sim/models/**/*.sdf
