@@ -1,7 +1,8 @@
 xhost +SI:localuser:root 
 # allows docker to use the x server 
 
-docker run -it --rm \
+
+sudo --preserve-env=DISPLAY --preserve-env=XAUTHORITY docker run -it --rm \
   -v $(pwd):/sim_ws \
   -w /sim_ws \
   -e DISPLAY=$DISPLAY \
