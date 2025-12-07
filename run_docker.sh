@@ -1,3 +1,5 @@
+export XAUTHORITY=$HOME/.Xauthority
+
 xhost +SI:localuser:root 
 # allows docker to use the x server 
 
