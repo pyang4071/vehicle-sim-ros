@@ -27,12 +27,15 @@ RUN apt-get update && apt-get install -y \
 	  # for X11 test
 	x11-apps 
 
-# gazebo stuff
+# Install Gazebo Garden repo
 RUN apt-get update && apt-get install -y \
-  gnupg lsb-release wget && \
-  wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/gazebo-archive-keyring.gpg && \
-  echo "deb [arch=amd64 signed-by=/usr/share/keyrings/gazebo-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu $(lsb_release -cs) stable" \
-      > /etc/apt/sources.list.d/gazebo-stable.list
+    curl gnupg lsb-release && \
+    curl -sSL https://packages.osrfoundation.org/gazebo.gpg \
+        | tee /usr/share/keyrings/gazebo.gpg > /dev/null && \
+    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/gazebo.gpg] \
+    https://packages.osrfoundation.org/gazebo/ubuntu \
+    $(lsb_release -cs) main" \
+    > /etc/apt/sources.list.d/gazebo-stable.list
 
 RUN apt-get update && apt-get install -y \
   gz-garden \
