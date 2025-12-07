@@ -44,7 +44,7 @@ RUN apt-get update && apt-get install -y \
 
 
 # Dev tools
-RUN apt-get install -y \
+RUN apt-get update && apt-get install -y \
 	tmux \
 	vim \
 	&& rm -rf /var/lib/apt/lists/*
