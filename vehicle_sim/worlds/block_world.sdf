@@ -3,7 +3,7 @@
   <world name="default">
 
     <include>
-      <uri>model://moving_block</uri>
+	    <uri>model:/sim_ws/vehicle_sim/models/moving_block</uri>
     </include>
 
     <physics type="ode">

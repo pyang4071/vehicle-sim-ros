@@ -1,10 +1,12 @@
 #!/bin/bash
 
+export GAZEBO_MODEL_PATH=/sim_ws/vehicle_sim/models:$GAZEBO_MODEL_PATH
+
 # Name of the tmux session
 SESSION="block_garden"
 
 # World file path (update to your workspace)
-WORLD_PATH="/sim_ws/worlds/block_world.sdf"
+WORLD_PATH="/sim_ws/vehicle_sim/worlds/block_world.sdf"
 
 # ROS2 namespace for the block
 BLOCK_NS="/block"
