@@ -70,6 +70,8 @@ RUN pip3 install --upgrade pip
 RUN pip3 install -e .
 RUN pip3 install -e '.[dev]'
 
+# set up pre-commit
+RUN pre-commit install
 
 # auto source the ros2 
 # these files should just be from the docker image 

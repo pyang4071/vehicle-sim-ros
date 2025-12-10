@@ -9,3 +9,4 @@ repos:
     rev: d82da0f0e9151bc9afae381f803948fe5836c084
     hooks:
     -   id: black
+
