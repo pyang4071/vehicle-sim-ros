@@ -1,0 +1,68 @@
+# ssh documentation
+
+We are going to set up multiple github accounts
+
+First, we create the ssh-key using the following command
+```
+ssh-keygen -t ed25519  -C "paddyyang4071@gmail.com" -f ~/.ssh/id_ed25519_paddy
+```
+Here, change the email used and the file name. We want the file to remain in the .ssh folder
+
+This generates two different ssh keys; one normal and one that is .pub
+
+Note that you probably want to put a passphrase since this is a "public" device
+
+Now we will add in into the .ssh.config with our new ssh key 
+
+Fill it out something like 
+
+```
+Host github-paddy
+  Hostname github.com
+  User git 
+  IdentityFile ~/.ssh/id_ed25519_paddy
+```
+
+This is basically aliasing the name into your ssh key. Make sure you replace the name on the first line to whatever username you want. 
+The IdentityFile is where you put the ssh key (the normal one, not the .pub)
+
+Now add the ssh key into your github account. We will take all the file content of the .pub file and add it to your github 
+
+```
+cat ~/.ssh/id_ed25519_paddy.pub 
+```
+
+Now we want to pull the repo you want, but we are still in the root directory which is using the global github user.
+When we want to clone normally using ssh, we have something like 
+```
+git clone git@github.com:pyang4071/vehicle-sim-ros.git 
+```
+
+Now we will slightly modify it so we clone using the correct account. We replace the github.com by your Host username you set earlier.
+As an example,
+```
+git clone git@github-paddy:pyang4071/vehicle-sim-ros.git
+```
+
+
+Now in the repo that you want to work in, you set the username 
+```
+git config user.name "Paddy"
+git config user.email "paddyyang4071@gmail.com"
+```
+
+Now we notice that every time you push or pull, you hadda input your passphrase which can get annoying
+
+Thus, we can set up an ssh agent to assist in our endeavors. While we can write what we are doing in the .bashrc file so it works on very terminal, we probably shouldn't jsut cuz others are using the device too. You also need to entire the passphrase here too... 
+
+Anyways, we can run the following to make it easier
+
+```
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519_paddy
+```
+
+And we are done. Btw if you want color in the terminal, you can source the setup file 
+```
+source .bashrc 
+```
