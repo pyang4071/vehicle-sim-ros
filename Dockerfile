@@ -1,5 +1,5 @@
 # Use ros2 humble base image
-# offical ros image from their thing - allows us to not have to manually install ros
+# offical ros humble image - allows us to not have to manually install ros
 FROM ros:humble
 
 
@@ -10,11 +10,12 @@ SHELL ["/bin/bash", "-c"]
 
 # download all the lower level dependencies we might need
 # we install git, python, ros2 and dev tools
-# libeigen3-dev is for c++ which ros needs i think
+# libeigen3-dev is for c++ which ros needs
 # finally we clean up some of the not useful stuff to make the image smaller
 # split download into multiple parts
-# first part is large and hopefully not ahve the change - we want to cache it
-# add smaller ones afterwards to save tume
+# we let the first parts but larger dependencies that would most likely not change
+# this allows us to cache it for the next build if needed 
+# add smaller ones afterwards to save time 
 RUN apt-get update && apt-get install -y \
 	git \
 	python3-pip \
@@ -27,6 +28,7 @@ RUN apt-get update && apt-get install -y \
 	  # for X11 test
 	x11-apps 
 
+# install our simulation dependencies
 # Install Gazebo Garden repo
 RUN apt-get update && apt-get install -y \
     curl gnupg lsb-release && \
@@ -44,6 +46,7 @@ RUN apt-get update && apt-get install -y \
 
 
 # Dev tools
+# add the new tools here to avoid having to rebuild the previous steps
 RUN apt-get update && apt-get install -y \
 	tmux \
 	vim \
@@ -79,7 +82,3 @@ RUN echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
 
 # now we set out default shell at entry into the docker
 ENTRYPOINT ["/bin/bash"]
-
-
-
-
